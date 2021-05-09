@@ -1,9 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'ArrayVisualizer.dart';
-import 'dart:math';
+import 'ArrayCreator.dart';
+import 'SortingScreen.dart';
 
-ArrayVisualizer av = new ArrayVisualizer();
+List<int> finalArrayOfNumbers;
+int finalTotalNumbers;
+List<Container> finalListOfContainers = [];
 void main() {
   runApp(
     MyApp(),
@@ -16,72 +19,133 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  @override
+  Widget build(BuildContext context) {
+    // .
+    // .
+    // .
+    // .
+
+    // List<Container> rows = [];
+    // List<Container> rowMaker(int z) {
+    //   for (int l = 0; l < z; l++) {
+    //     rows.add(
+    //       av.createContainer((random.nextInt(100) + 1) * 4),
+    //     );
+    //   }
+    //
+    //   return rows;
+    // }
+
+    return MaterialApp(
+      initialRoute: '/',
+      routes: {
+        '/2': (context) => SortingScreen(
+            finalArrayOfNumbers, finalTotalNumbers, finalListOfContainers),
+      },
+      home: MyHome(),
+    );
+  }
+}
+
+class MyHome extends StatefulWidget {
+  const MyHome({Key key}) : super(key: key);
+
+  @override
+  _MyHomeState createState() => _MyHomeState();
+}
+
+class _MyHomeState extends State<MyHome> {
   double _currentSliderValue = 20;
   @override
   Widget build(BuildContext context) {
-    Random rng = new Random();
-    Container createContainer(int q) {
-      return Container(
-        color: Color(0xff36454F),
-        height: q.toDouble(),
-        width: 2,
-        child: Text(' '),
-      );
-    }
+    ArrayCreator arrayCreator = new ArrayCreator();
+    List<Container> rows = arrayCreator.rowMaker(
+      _currentSliderValue.toInt(),
+    );
+    finalArrayOfNumbers = arrayCreator.arrayOfNumbers;
 
-    List<Container> rows = [];
-    List<Container> rowMaker(int z) {
-      for (int l = 0; l < z; l++) {
-        rows.add(
-          createContainer((rng.nextInt(100) + 1) * 4),
-        );
-      }
+    finalListOfContainers = rows;
 
-      return rows;
-    }
-
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Color(0xffD3D3D3),
-        body: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                flex: 10,
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.grey,
+        title: Text(
+          'Cliche Array Sorting Visualizer',
+          style: TextStyle(
+            color: Colors.black,
+          ),
+        ),
+      ),
+      backgroundColor: Color(0xffC9CBCC),
+      body: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Expanded(
+              child: SizedBox(
+                height: 10,
+              ),
+            ),
+            Expanded(
+              flex: 20,
+              child: Container(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.end,
-                  children: rowMaker(_currentSliderValue.toInt()),
+                  children: rows,
                 ),
               ),
-              Expanded(
-                flex: 2,
-                child: Container(
-                  child: Slider(
-                      value: _currentSliderValue,
-                      min: 0,
-                      max: 100,
-                      divisions: 100,
-                      label: _currentSliderValue.round().toString(),
-                      onChanged: (double value) {
-                        setState(() {
-                          _currentSliderValue = value;
-                        });
-                      }),
-                ),
+            ),
+            Expanded(
+              flex: 2,
+              child: Container(
+                child: Slider(
+                    activeColor: Color(0xff282828),
+                    inactiveColor: Colors.blueGrey,
+                    value: _currentSliderValue,
+                    min: 0,
+                    max: 100,
+                    divisions: 100,
+                    label: _currentSliderValue.round().toString(),
+                    onChanged: (double value) {
+                      setState(() {
+                        finalTotalNumbers = value.toInt();
+                        _currentSliderValue = value;
+                      });
+                    }),
               ),
-              Expanded(
-                child: FloatingActionButton(
-                  backgroundColor: Color(0xff40826D),
-                  child: Icon(Icons.refresh_outlined),
+            ),
+            Expanded(
+              flex: 1,
+              child: FloatingActionButton(
+                backgroundColor: Color(0xff282828),
+                child: Icon(Icons.refresh_outlined),
+                onPressed: () {
+                  setState(() {});
+                },
+              ),
+            ),
+            Expanded(
+              flex: 3,
+              child: Hero(
+                tag: "sortButton",
+                child: TextButton(
                   onPressed: () {
-                    setState(() {});
+                    Navigator.pushNamed(context, '/2');
+                    print(finalArrayOfNumbers);
                   },
+                  child: Card(
+                    elevation: 10,
+                    child: Text(
+                      'Sort',
+                      style: TextStyle(fontSize: 30),
+                    ),
+                  ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
