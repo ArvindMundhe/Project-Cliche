@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:project_cliche/main.dart';
 import 'ArrayCreator.dart';
-import 'package:intl/intl.dart';
 
 //
 //
-class SortingScreen extends StatefulWidget {
-  //
-  //
+//
+class BubbleSort extends StatefulWidget {
   //
   //
   List<int> finalListOfNumbers;
@@ -15,27 +13,21 @@ class SortingScreen extends StatefulWidget {
   List<Container> finalListOfContainers;
   //
   //
-  //
-  //
-  SortingScreen(List<int> numbers, int numberofelements,
+  BubbleSort(List<int> numbers, int numberofelements,
       List<Container> listofcontainers) {
     finalListOfNumbers = numbers;
     finalTotalNumber = numberofelements;
   }
   //
   //
-  //
-  //
   @override
-  _SortingScreenState createState() => _SortingScreenState();
+  _BubbleSortState createState() => _BubbleSortState();
 }
 
 //
 //
-//
-//
-class _SortingScreenState extends State<SortingScreen>
-    with TickerProviderStateMixin {
+class _BubbleSortState extends State<BubbleSort> with TickerProviderStateMixin {
+  int numberOfComparisons = 0, numberOfSwaps = 0;
   double currentSliderValue = 2;
   double speedFactor = 2;
   bool isPressedOnce = false;
@@ -52,12 +44,13 @@ class _SortingScreenState extends State<SortingScreen>
         listOfIntegers[t + 1].toDouble(), numberOfElements, clr);
   }
 
+  //
+  //
   void swapperBhai(int index, List containers, List integers) {
     Container temp = finalListOfContainers[index];
     int temp1 = integers[index];
     //
     //
-
     integers[index] = integers[index + 1];
     integers[index + 1] = temp1;
     //
@@ -77,35 +70,32 @@ class _SortingScreenState extends State<SortingScreen>
       //
       for (int j = 0; j < finalListOfIntegers.length - y - 1; j++) {
         //
-        await Future.delayed(Duration(milliseconds: (100 ~/ speedFactor)), () {
+        //
+        await Future.delayed(Duration(milliseconds: (200 ~/ speedFactor)), () {
           setState(() {
+            numberOfComparisons++;
             containerColourChanger(finalListOfContainers, j,
                 finalListOfIntegers, sizeOfArray, Colors.cyan);
           });
         });
-
         //
         //
         if (finalListOfIntegers[j] > finalListOfIntegers[j + 1]) {
           await Future.delayed(Duration(milliseconds: 200 ~/ speedFactor), () {
             setState(() {
+              numberOfSwaps++;
               swapperBhai(j, finalListOfContainers, finalListOfIntegers);
             });
           });
-
           //
           //
-          //
-          //
-
         }
-        await Future.delayed(Duration(milliseconds: 400 ~/ speedFactor), () {
+        await Future.delayed(Duration(milliseconds: 200 ~/ speedFactor), () {
           setState(() {
             containerColourChanger(finalListOfContainers, j,
-                finalListOfIntegers, sizeOfArray, Color(0xffe50914));
+                finalListOfIntegers, sizeOfArray, Colors.black);
           });
         });
-
         //
         //
       }
@@ -114,25 +104,17 @@ class _SortingScreenState extends State<SortingScreen>
 
   //
   //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey,
         title: Text(
-          'Cliche Array Sorting Visualizer',
+          'Cliche Bubble Sorting Visualizer',
           style: TextStyle(
-            color: Colors.black,
-          ),
+              fontWeight: FontWeight.bold,
+              fontFamily: 'BebasNeue',
+              fontSize: 25),
         ),
       ),
       backgroundColor: Color(0xffC9CBCC),
@@ -142,11 +124,48 @@ class _SortingScreenState extends State<SortingScreen>
           children: [
             Expanded(
               child: SizedBox(
-                height: 10,
+                height: 40,
+              ),
+            ),
+            Text(
+              'Lezgo!!!',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'BebasNeue',
+                  fontSize: 30),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Number of comparisons :  $numberOfComparisons',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'BebasNeue',
+                      fontSize: 22),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  'Number of swaps : $numberOfSwaps',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'BebasNeue',
+                      fontSize: 22),
+                ),
+              ],
+            ),
+            Expanded(
+              child: SizedBox(
+                height: 40,
               ),
             ),
             Expanded(
-              flex: 25,
+              flex: 20,
               child: Container(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -175,6 +194,16 @@ class _SortingScreenState extends State<SortingScreen>
               ),
             ),
             Expanded(
+              flex: 2,
+              child: Text(
+                'Use the slider to change the speed of sorting',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'BebasNeue',
+                    fontSize: 22),
+              ),
+            ),
+            Expanded(
               flex: 6,
               child: Hero(
                 tag: "sortButton",
@@ -192,7 +221,10 @@ class _SortingScreenState extends State<SortingScreen>
                     elevation: 10,
                     child: Text(
                       'Sort',
-                      style: TextStyle(fontSize: 30),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'BebasNeue',
+                          fontSize: 50),
                     ),
                   ),
                 ),

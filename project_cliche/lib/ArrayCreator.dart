@@ -21,8 +21,8 @@ class ArrayCreator {
   List<Container> rowMaker(int z) {
     for (int l = 0; l < z; l++) {
       arrayOfNumbers.add(rng.nextInt(100) + 1);
-      rows.add(createContainer(
-          (arrayOfNumbers[l]).toDouble(), z, Color(0xffe50914)));
+      rows.add(
+          createContainer((arrayOfNumbers[l]).toDouble(), z, Colors.black));
     }
     return rows;
   }

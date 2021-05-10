@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'ArrayCreator.dart';
-import 'SortingScreen.dart';
+import 'BubbleSort.dart';
+import 'InsertionSort.dart';
 
 List<int> finalArrayOfNumbers;
 int finalTotalNumbers;
@@ -21,27 +22,17 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    // .
-    // .
-    // .
-    // .
-
-    // List<Container> rows = [];
-    // List<Container> rowMaker(int z) {
-    //   for (int l = 0; l < z; l++) {
-    //     rows.add(
-    //       av.createContainer((random.nextInt(100) + 1) * 4),
-    //     );
-    //   }
     //
-    //   return rows;
-    // }
-
+    //
+    //
+    //
     return MaterialApp(
       initialRoute: '/',
       routes: {
-        '/2': (context) => SortingScreen(
+        '/2': (context) => BubbleSort(
             finalArrayOfNumbers, finalTotalNumbers, finalListOfContainers),
+        '/3': (context) => InsertionSort(
+            finalArrayOfNumbers, finalTotalNumbers, finalListOfContainers)
       },
       home: MyHome(),
     );
@@ -73,8 +64,10 @@ class _MyHomeState extends State<MyHome> {
         title: Text(
           'Cliche Array Sorting Visualizer',
           style: TextStyle(
-            color: Colors.black,
-          ),
+              color: Color(0xff0F6A67),
+              fontWeight: FontWeight.bold,
+              fontFamily: 'BebasNeue',
+              fontSize: 30),
         ),
       ),
       backgroundColor: Color(0xffC9CBCC),
@@ -87,8 +80,15 @@ class _MyHomeState extends State<MyHome> {
                 height: 10,
               ),
             ),
+            Text(
+              'Create an array',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30,
+                  fontFamily: 'BebasNeue'),
+            ),
             Expanded(
-              flex: 20,
+              flex: 30,
               child: Container(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -117,33 +117,82 @@ class _MyHomeState extends State<MyHome> {
               ),
             ),
             Expanded(
-              flex: 1,
+              flex: 2,
+              child: Text(
+                'Use the slider to change the number of elements',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'BebasNeue',
+                    fontSize: 22),
+              ),
+            ),
+            Expanded(
+              flex: 2,
               child: FloatingActionButton(
-                backgroundColor: Color(0xff282828),
-                child: Icon(Icons.refresh_outlined),
+                backgroundColor: Colors.black12,
+                child: Icon(
+                  Icons.refresh_outlined,
+                  color: Color(0xff232e45),
+                ),
                 onPressed: () {
                   setState(() {});
                 },
               ),
             ),
+            SizedBox(
+              height: 10,
+            ),
             Expanded(
               flex: 3,
-              child: Hero(
-                tag: "sortButton",
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/2');
-                    print(finalArrayOfNumbers);
-                  },
-                  child: Card(
-                    elevation: 10,
-                    child: Text(
-                      'Sort',
-                      style: TextStyle(fontSize: 30),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Hero(
+                    tag: "sortButton",
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/2');
+                        print(finalArrayOfNumbers);
+                      },
+                      child: Container(
+                        height: 50,
+                        child: Card(
+                          elevation: 10,
+                          child: Text(
+                            'Bubble Sort',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'BebasNeue',
+                                fontSize: 30),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                  Hero(
+                    tag: 'InsertionGraph',
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/3');
+                        print(finalArrayOfNumbers);
+                      },
+                      child: Card(
+                        elevation: 10,
+                        child: Text(
+                          'Insertion Sort',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'BebasNeue',
+                              fontSize: 30),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
+            ),
+            SizedBox(
+              height: 10,
             ),
           ],
         ),

@@ -18,7 +18,13 @@ dev_dependencies:
     sdk: flutter
 
 flutter:
-
+  fonts:
+    - family: Sabon
+      fonts:
+        - asset: fonts/SabonBold.ttf
+    - family: BebasNeue
+      fonts:
+        - asset: fonts/BebasNeue-Regular.ttf
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
