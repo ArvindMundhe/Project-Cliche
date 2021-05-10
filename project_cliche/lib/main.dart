@@ -27,6 +27,7 @@ class _MyAppState extends State<MyApp> {
     //
     //
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
         '/2': (context) => BubbleSort(

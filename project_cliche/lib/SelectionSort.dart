@@ -46,18 +46,18 @@ class _InsertionSortState extends State<InsertionSort>
         listOfIntegers[t + 1].toDouble(), numberOfElements, clr);
   }
 
-  // void swapperBhai(int index, List containers, List integers) {
-  //   Container temp = finalListOfContainers[index];
-  //   int temp1 = integers[index];
-  //   //
-  //   //
-  //   integers[index] = integers[index + 1];
-  //   integers[index + 1] = temp1;
-  //   //
-  //   //
-  //   containers[index] = containers[index + 1];
-  //   containers[index + 1] = temp;
-  // }
+  void swapperBhai(int index, List containers, List integers) {
+    Container temp = finalListOfContainers[index];
+    int temp1 = integers[index];
+    //
+    //
+    integers[index] = integers[index + 1];
+    integers[index + 1] = temp1;
+    //
+    //
+    containers[index] = containers[index + 1];
+    containers[index + 1] = temp;
+  }
 
   //
   //
