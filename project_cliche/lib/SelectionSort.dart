@@ -4,7 +4,7 @@ import 'ArrayCreator.dart';
 
 //
 //
-class InsertionSort extends StatefulWidget {
+class SelectionSort extends StatefulWidget {
   //
   //
   List<int> finalListOfNumbers;
@@ -13,7 +13,7 @@ class InsertionSort extends StatefulWidget {
 
   //
   //
-  InsertionSort(List<int> numbers, int numberofelements,
+  SelectionSort(List<int> numbers, int numberofelements,
       List<Container> listofcontainers) {
     finalListOfNumbers = numbers;
     finalTotalNumber = numberofelements;
@@ -21,17 +21,18 @@ class InsertionSort extends StatefulWidget {
   //
   //
   @override
-  _InsertionSortState createState() => _InsertionSortState();
+  _SelectionSortState createState() => _SelectionSortState();
 }
 
 //
 //
-class _InsertionSortState extends State<InsertionSort>
+class _SelectionSortState extends State<SelectionSort>
     with TickerProviderStateMixin {
   int numberOfComparisons = 0, numberOfSwaps = 0;
   double currentSliderValue = 2;
   double speedFactor = 2;
   bool isPressedOnce = false;
+
   //
   //
   ArrayCreator arrayCreator = ArrayCreator();
@@ -46,98 +47,91 @@ class _InsertionSortState extends State<InsertionSort>
         listOfIntegers[t + 1].toDouble(), numberOfElements, clr);
   }
 
-  void swapperBhai(int index, List containers, List integers) {
-    Container temp = finalListOfContainers[index];
-    int temp1 = integers[index];
-    //
-    //
-    integers[index] = integers[index + 1];
-    integers[index + 1] = temp1;
-    //
-    //
-    containers[index] = containers[index + 1];
-    containers[index + 1] = temp;
-  }
+  // void swapperBhai(int index, List containers, List integers) {
+  //   Container temp = finalListOfContainers[index];
+  //   int temp1 = integers[index];
+  //   //
+  //   //
+  //   integers[index] = integers[index + 1];
+  //   integers[index + 1] = temp1;
+  //   //
+  //   //
+  //   containers[index] = containers[index + 1];
+  //   containers[index + 1] = temp;
+  // }
 
   //
   //
   void sortTheArray(int sizeOfArray, List<int> finalListOfIntegers,
       finalListOfContainers, double speed) async {
-    int i, key, j;
-    for (i = 1; i < finalListOfIntegers.length; i++) {
-      key = finalListOfIntegers[i];
-      await Future.delayed(Duration(milliseconds: 100), () {
-        setState(() {
-          finalListOfContainers[i] = arrayCreator.createContainer(
-              finalListOfIntegers[i].toDouble(),
-              finalListOfIntegers.length,
-              Colors.cyan);
-        });
-      });
-
-      j = i - 1;
-      if (j >= 0) {
-        numberOfComparisons++;
-        finalListOfContainers[j] = arrayCreator.createContainer(
-            finalListOfIntegers[j].toDouble(),
-            finalListOfIntegers.length,
-            Colors.red);
-      }
-      /* Move elements of arr[0..i-1], that are
-        greater than key, to one position ahead
-        of their current position */
-      while (j >= 0 && finalListOfIntegers[j] > key) {
+    int minimum;
+    // reduces the effective size of the array by one in  each iteration.
+    for (int i = 0; i < finalListOfIntegers.length - 1; i++) {
+      // assuming the first element to be the minimum of the unsorted array .
+      minimum = i;
+      // gives the effective size of the unsorted  array .
+      for (int j = i + 1; j < finalListOfIntegers.length; j++) {
         await Future.delayed(Duration(milliseconds: 100 ~/ speedFactor), () {
           setState(() {
             numberOfComparisons++;
-            finalListOfContainers[j] = arrayCreator.createContainer(
+            finalListOfContainers[minimum] = arrayCreator.createContainer(
                 finalListOfIntegers[j].toDouble(),
                 finalListOfIntegers.length,
-                Colors.cyan);
-            finalListOfContainers[j + 1] = arrayCreator.createContainer(
-                finalListOfIntegers[j + 1].toDouble(),
-                finalListOfIntegers.length,
-                Colors.cyan);
+                Colors.greenAccent);
           });
         });
+        if (finalListOfIntegers[j] < finalListOfIntegers[minimum]) {
+          //finds the minimum element
+          minimum = j;
+        }
         await Future.delayed(Duration(milliseconds: 100 ~/ speedFactor), () {
           setState(() {
-            finalListOfContainers[j] = arrayCreator.createContainer(
+            finalListOfContainers[minimum] = arrayCreator.createContainer(
                 finalListOfIntegers[j].toDouble(),
                 finalListOfIntegers.length,
-                Colors.black);
-            finalListOfContainers[j + 1] = arrayCreator.createContainer(
-                finalListOfIntegers[j + 1].toDouble(),
-                finalListOfIntegers.length,
-                Colors.black);
-          });
-        });
-        await Future.delayed(Duration(milliseconds: 100 ~/ speedFactor), () {
-          setState(() {
-            numberOfSwaps++;
-            finalListOfIntegers[j + 1] = finalListOfIntegers[j];
-            finalListOfContainers[j + 1] = arrayCreator.createContainer(
-                finalListOfIntegers[j + 1].toDouble(),
-                finalListOfIntegers.length,
-                Colors.black);
-            j = j - 1;
+                Colors.greenAccent);
           });
         });
       }
+      // putting minimum element on its proper position.
+      // swap(A[minimum], A[i]);
       await Future.delayed(Duration(milliseconds: 100 ~/ speedFactor), () {
         setState(() {
-          finalListOfIntegers[j + 1] = key;
-          finalListOfContainers[j + 1] = arrayCreator.createContainer(
-              key.toDouble(), finalListOfIntegers.length, Colors.black);
+          numberOfSwaps++;
+          int tempInteger = finalListOfIntegers[minimum];
+          finalListOfIntegers[minimum] = finalListOfIntegers[i];
+          finalListOfIntegers[i] = tempInteger;
+          finalListOfContainers[minimum] = arrayCreator.createContainer(
+              finalListOfIntegers[minimum].toDouble(),
+              finalListOfIntegers.length,
+              Colors.redAccent);
+
+          finalListOfContainers[i] = arrayCreator.createContainer(
+              finalListOfIntegers[i].toDouble(),
+              finalListOfIntegers.length,
+              Colors.greenAccent);
         });
       });
     }
-    for (int v = 0; v < finalListOfIntegers.length; v++) {
-      finalListOfContainers[v] = arrayCreator.createContainer(
-          finalListOfIntegers[v].toDouble(),
-          finalListOfIntegers.length,
-          Colors.black);
-    }
+
+    await Future.delayed(Duration(milliseconds: 100 ~/ speedFactor), () {
+      setState(() {
+        for (int f = 0; f < finalListOfIntegers.length; f++) {
+          finalListOfContainers[minimum] = arrayCreator.createContainer(
+              finalListOfIntegers[minimum].toDouble(),
+              finalListOfIntegers.length,
+              Colors.black);
+          finalListOfContainers[f] = arrayCreator.createContainer(
+              finalListOfIntegers[f].toDouble(),
+              finalListOfIntegers.length,
+              Colors.black);
+          finalListOfContainers[minimum] = arrayCreator.createContainer(
+              finalListOfIntegers[minimum].toDouble(),
+              finalListOfIntegers.length,
+              Colors.black);
+        }
+      });
+    });
   }
 
   @override
@@ -146,7 +140,7 @@ class _InsertionSortState extends State<InsertionSort>
       appBar: AppBar(
         backgroundColor: Colors.grey,
         title: Text(
-          'Cliche Insertion Sorting Visualizer',
+          'Cliche Selection Sorting Visualizer',
           style: TextStyle(
               fontWeight: FontWeight.bold,
               fontFamily: 'BebasNeue',
@@ -163,12 +157,68 @@ class _InsertionSortState extends State<InsertionSort>
                 height: 40,
               ),
             ),
-            Text(
-              'LeZgo!!!',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'BebasNeue',
-                  fontSize: 30),
+            Column(
+              children: [
+                Text(
+                  'Lezgo!!!',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'BebasNeue',
+                      fontSize: 20),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      'Red Flash ',
+                      style: TextStyle(
+                          color: Colors.redAccent,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'BebasNeue',
+                          fontSize: 20),
+                    ),
+                    Text(
+                      ' indicates the maximum element at that instant. ',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'BebasNeue',
+                          fontSize: 20),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      'Cyan Flash',
+                      style: TextStyle(
+                          color: Colors.cyanAccent,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'BebasNeue',
+                          fontSize: 20),
+                    ),
+                    Text(
+                      ' indicates elements which are compared. ',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'BebasNeue',
+                          fontSize: 20),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    )
+                  ],
+                ),
+              ],
             ),
             SizedBox(
               height: 10,
@@ -242,7 +292,7 @@ class _InsertionSortState extends State<InsertionSort>
             Expanded(
               flex: 6,
               child: Hero(
-                tag: "InsertionGraph",
+                tag: "SelectionGraph",
                 child: TextButton(
                   onPressed: () {
                     setState(() {
@@ -271,6 +321,5 @@ class _InsertionSortState extends State<InsertionSort>
         ),
       ),
     );
-    //
   }
 }

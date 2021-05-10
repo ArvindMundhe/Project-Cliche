@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'ArrayCreator.dart';
 import 'BubbleSort.dart';
 import 'InsertionSort.dart';
+import 'SelectionSort.dart';
 
 List<int> finalArrayOfNumbers;
 int finalTotalNumbers;
@@ -33,6 +34,8 @@ class _MyAppState extends State<MyApp> {
         '/2': (context) => BubbleSort(
             finalArrayOfNumbers, finalTotalNumbers, finalListOfContainers),
         '/3': (context) => InsertionSort(
+            finalArrayOfNumbers, finalTotalNumbers, finalListOfContainers),
+        '/4': (context) => SelectionSort(
             finalArrayOfNumbers, finalTotalNumbers, finalListOfContainers)
       },
       home: MyHome(),
@@ -155,17 +158,14 @@ class _MyHomeState extends State<MyHome> {
                         Navigator.pushNamed(context, '/2');
                         print(finalArrayOfNumbers);
                       },
-                      child: Container(
-                        height: 50,
-                        child: Card(
-                          elevation: 10,
-                          child: Text(
-                            'Bubble Sort',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'BebasNeue',
-                                fontSize: 30),
-                          ),
+                      child: Card(
+                        elevation: 10,
+                        child: Text(
+                          'Bubble Sort',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'BebasNeue',
+                              fontSize: 25),
                         ),
                       ),
                     ),
@@ -184,7 +184,26 @@ class _MyHomeState extends State<MyHome> {
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontFamily: 'BebasNeue',
-                              fontSize: 30),
+                              fontSize: 25),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Hero(
+                    tag: 'SelectionGraph',
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/4');
+                        print(finalArrayOfNumbers);
+                      },
+                      child: Card(
+                        elevation: 10,
+                        child: Text(
+                          'Selection Sort',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'BebasNeue',
+                              fontSize: 25),
                         ),
                       ),
                     ),

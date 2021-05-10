@@ -75,7 +75,7 @@ class _BubbleSortState extends State<BubbleSort> with TickerProviderStateMixin {
           setState(() {
             numberOfComparisons++;
             containerColourChanger(finalListOfContainers, j,
-                finalListOfIntegers, sizeOfArray, Colors.cyan);
+                finalListOfIntegers, sizeOfArray, Colors.cyanAccent);
           });
         });
         //
@@ -84,13 +84,22 @@ class _BubbleSortState extends State<BubbleSort> with TickerProviderStateMixin {
           await Future.delayed(Duration(milliseconds: 200 ~/ speedFactor), () {
             setState(() {
               numberOfSwaps++;
+              finalListOfContainers[j] = arrayCreator.createContainer(
+                  finalListOfIntegers[j].toDouble(),
+                  finalListOfIntegers.length,
+                  Colors.redAccent);
+              finalListOfContainers[j + 1] = arrayCreator.createContainer(
+                  finalListOfIntegers[j + 1].toDouble(),
+                  finalListOfIntegers.length,
+                  Colors.redAccent);
+
               swapperBhai(j, finalListOfContainers, finalListOfIntegers);
             });
           });
           //
           //
         }
-        await Future.delayed(Duration(milliseconds: 200 ~/ speedFactor), () {
+        await Future.delayed(Duration(milliseconds: 300 ~/ speedFactor), () {
           setState(() {
             containerColourChanger(finalListOfContainers, j,
                 finalListOfIntegers, sizeOfArray, Colors.black);
@@ -127,12 +136,68 @@ class _BubbleSortState extends State<BubbleSort> with TickerProviderStateMixin {
                 height: 40,
               ),
             ),
-            Text(
-              'Lezgo!!!',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'BebasNeue',
-                  fontSize: 30),
+            Column(
+              children: [
+                Text(
+                  'Lezgo!!!',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'BebasNeue',
+                      fontSize: 20),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    SizedBox(
+                      width: 70,
+                    ),
+                    Text(
+                      'Red Flash',
+                      style: TextStyle(
+                          color: Colors.redAccent,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'BebasNeue',
+                          fontSize: 20),
+                    ),
+                    Text(
+                      ' indicates a swapping action. ',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'BebasNeue',
+                          fontSize: 20),
+                    ),
+                    SizedBox(
+                      width: 70,
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    SizedBox(
+                      width: 30,
+                    ),
+                    Text(
+                      'Cyan Flash',
+                      style: TextStyle(
+                          color: Colors.cyanAccent,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'BebasNeue',
+                          fontSize: 20),
+                    ),
+                    Text(
+                      ' indicates elements which are compared. ',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'BebasNeue',
+                          fontSize: 20),
+                    ),
+                    SizedBox(
+                      width: 30,
+                    ),
+                  ],
+                ),
+              ],
             ),
             SizedBox(
               height: 10,
@@ -234,6 +299,5 @@ class _BubbleSortState extends State<BubbleSort> with TickerProviderStateMixin {
         ),
       ),
     );
-    //
   }
 }

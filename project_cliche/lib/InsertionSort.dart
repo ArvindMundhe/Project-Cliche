@@ -46,19 +46,6 @@ class _InsertionSortState extends State<InsertionSort>
         listOfIntegers[t + 1].toDouble(), numberOfElements, clr);
   }
 
-  // void swapperBhai(int index, List containers, List integers) {
-  //   Container temp = finalListOfContainers[index];
-  //   int temp1 = integers[index];
-  //   //
-  //   //
-  //   integers[index] = integers[index + 1];
-  //   integers[index + 1] = temp1;
-  //   //
-  //   //
-  //   containers[index] = containers[index + 1];
-  //   containers[index + 1] = temp;
-  // }
-
   //
   //
   void sortTheArray(int sizeOfArray, List<int> finalListOfIntegers,
@@ -74,7 +61,8 @@ class _InsertionSortState extends State<InsertionSort>
               Colors.cyan);
         });
       });
-
+      //
+      //
       j = i - 1;
       if (j >= 0) {
         numberOfComparisons++;
@@ -163,12 +151,68 @@ class _InsertionSortState extends State<InsertionSort>
                 height: 40,
               ),
             ),
-            Text(
-              'LeZgo!!!',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'BebasNeue',
-                  fontSize: 30),
+            Column(
+              children: [
+                Text(
+                  'Lezgo!!!',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'BebasNeue',
+                      fontSize: 20),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      'Red Flash ',
+                      style: TextStyle(
+                          color: Colors.redAccent,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'BebasNeue',
+                          fontSize: 20),
+                    ),
+                    Text(
+                      ' indicates the maximum element at that instant. ',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'BebasNeue',
+                          fontSize: 20),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      'Cyan Flash',
+                      style: TextStyle(
+                          color: Colors.cyanAccent,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'BebasNeue',
+                          fontSize: 20),
+                    ),
+                    Text(
+                      ' indicates elements which are compared. ',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'BebasNeue',
+                          fontSize: 20),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    )
+                  ],
+                ),
+              ],
             ),
             SizedBox(
               height: 10,
