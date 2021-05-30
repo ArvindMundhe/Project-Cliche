@@ -38,13 +38,13 @@ class _InsertionSortState extends State<InsertionSort>
 
   //
   //
-  void containerColourChanger(List<Container> listOfContainersForColour, int t,
-      List<int> listOfIntegers, int numberOfElements, Color clr) {
-    listOfContainersForColour[t] = arrayCreator.createContainer(
-        listOfIntegers[t].toDouble(), numberOfElements, clr);
-    listOfContainersForColour[t + 1] = arrayCreator.createContainer(
-        listOfIntegers[t + 1].toDouble(), numberOfElements, clr);
-  }
+  // void containerColourChanger(List<Container> listOfContainersForColour, int t,
+  //     List<int> listOfIntegers, int numberOfElements, Color clr) {
+  //   listOfContainersForColour[t] = arrayCreator.createContainer(
+  //       listOfIntegers[t].toDouble(), numberOfElements, clr);
+  //   listOfContainersForColour[t + 1] = arrayCreator.createContainer(
+  //       listOfIntegers[t + 1].toDouble(), numberOfElements, clr);
+  // }
 
   //
   //
@@ -132,16 +132,17 @@ class _InsertionSortState extends State<InsertionSort>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.grey[300],
         title: Text(
           'Cliche Insertion Sorting Visualizer',
           style: TextStyle(
+              color: Color(0xff216869),
               fontWeight: FontWeight.bold,
               fontFamily: 'BebasNeue',
               fontSize: 25),
         ),
       ),
-      backgroundColor: Color(0xffC9CBCC),
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -245,7 +246,7 @@ class _InsertionSortState extends State<InsertionSort>
               ),
             ),
             Expanded(
-              flex: 20,
+              flex: 30,
               child: Container(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

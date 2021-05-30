@@ -10,7 +10,6 @@ class SelectionSort extends StatefulWidget {
   List<int> finalListOfNumbers;
   int finalTotalNumber;
   List<Container> finalListOfContainers;
-
   //
   //
   SelectionSort(List<int> numbers, int numberofelements,
@@ -114,40 +113,46 @@ class _SelectionSortState extends State<SelectionSort>
       });
     }
 
-    await Future.delayed(Duration(milliseconds: 100 ~/ speedFactor), () {
-      setState(() {
-        for (int f = 0; f < finalListOfIntegers.length; f++) {
-          finalListOfContainers[minimum] = arrayCreator.createContainer(
-              finalListOfIntegers[minimum].toDouble(),
-              finalListOfIntegers.length,
-              Colors.black);
-          finalListOfContainers[f] = arrayCreator.createContainer(
-              finalListOfIntegers[f].toDouble(),
-              finalListOfIntegers.length,
-              Colors.black);
-          finalListOfContainers[minimum] = arrayCreator.createContainer(
-              finalListOfIntegers[minimum].toDouble(),
-              finalListOfIntegers.length,
-              Colors.black);
-        }
-      });
-    });
+    await Future.delayed(
+      Duration(milliseconds: 100 ~/ speedFactor),
+      () {
+        setState(
+          () {
+            for (int f = 0; f < finalListOfIntegers.length; f++) {
+              finalListOfContainers[minimum] = arrayCreator.createContainer(
+                  finalListOfIntegers[minimum].toDouble(),
+                  finalListOfIntegers.length,
+                  Colors.black);
+              finalListOfContainers[f] = arrayCreator.createContainer(
+                  finalListOfIntegers[f].toDouble(),
+                  finalListOfIntegers.length,
+                  Colors.black);
+              finalListOfContainers[minimum] = arrayCreator.createContainer(
+                  finalListOfIntegers[minimum].toDouble(),
+                  finalListOfIntegers.length,
+                  Colors.black);
+            }
+          },
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.grey[300],
         title: Text(
           'Cliche Selection Sorting Visualizer',
           style: TextStyle(
+              color: Color(0xff216869),
               fontWeight: FontWeight.bold,
               fontFamily: 'BebasNeue',
               fontSize: 25),
         ),
       ),
-      backgroundColor: Color(0xffC9CBCC),
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -251,7 +256,7 @@ class _SelectionSortState extends State<SelectionSort>
               ),
             ),
             Expanded(
-              flex: 20,
+              flex: 30,
               child: Container(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

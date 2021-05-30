@@ -117,16 +117,17 @@ class _BubbleSortState extends State<BubbleSort> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.grey[300],
         title: Text(
           'Cliche Bubble Sorting Visualizer',
           style: TextStyle(
+              color: Color(0xff216869),
               fontWeight: FontWeight.bold,
               fontFamily: 'BebasNeue',
               fontSize: 25),
         ),
       ),
-      backgroundColor: Color(0xffC9CBCC),
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -230,7 +231,7 @@ class _BubbleSortState extends State<BubbleSort> with TickerProviderStateMixin {
               ),
             ),
             Expanded(
-              flex: 20,
+              flex: 30,
               child: Container(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
