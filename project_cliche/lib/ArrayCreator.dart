@@ -3,19 +3,11 @@ import 'dart:math';
 
 //
 //
-//
-//
-//
-//
+
 class ArrayCreator {
   Random rng = new Random();
   List<Container> rows = [];
   List<int> arrayOfNumbers = [];
-  //
-  //
-  //
-  //
-  //
   //
   //
   List<Container> rowMaker(int z) {
@@ -27,11 +19,6 @@ class ArrayCreator {
     return rows;
   }
 
-//
-//
-//
-//
-//
 //
   Container createContainer(double heightOfBar, int numberOfBars, Color clr) {
     return Container(
